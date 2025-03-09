@@ -51,7 +51,8 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name = "brand_id") 
 	private Brand brand;
-	@JsonIgnore
+	
+	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="product_category",
 		joinColumns = @JoinColumn(name="product_id"),
