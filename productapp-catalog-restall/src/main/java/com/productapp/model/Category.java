@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,10 +34,7 @@ public class Category {
 	@Column(length = 30)
 	private String subcategory;
 	
-	@ManyToMany
-	@JoinTable(name="product_category",
-	    joinColumns = @JoinColumn(name="category_id"),
-	    inverseJoinColumns = @JoinColumn(name="product_id"))
+	@ManyToMany(mappedBy="categories")
 	@ToString.Exclude
 	private List<Product> products;
 

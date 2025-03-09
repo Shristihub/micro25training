@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.productapp.model.Product;
 import com.productapp.repository.IProductRepository;
+
+import jakarta.transaction.Transactional;
 @Service
+@Transactional
 public class ProductServiceImpl implements IProductService {
 
 	private IProductRepository productRepository;

@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.productapp.model.Category;
-import com.productapp.model.Product;
 import com.productapp.repository.ICategoryRepository;
 
 @Service
