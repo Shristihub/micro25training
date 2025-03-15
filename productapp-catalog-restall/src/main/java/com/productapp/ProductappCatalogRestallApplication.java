@@ -58,10 +58,10 @@ public class ProductappCatalogRestallApplication implements CommandLineRunner{
 //		List<Category> categories = Arrays.asList(category1,category2);
 //		
 //		//create a brand;
-////		Brand brand = new Brand("Samsung","Electronics");
-////		brandService.addBrand(brand);
-////		brand = new Brand("Nike","Sports");
-////		brandService.addBrand(brand);
+//		Brand brand = new Brand("Samsung","Electronics");
+//		brandService.addBrand(brand);
+//		brand = new Brand("Nike","Sports");
+//		brandService.addBrand(brand);
 ////		
 //		Brand nbrand = brandService.getById(20);
 //		
@@ -84,8 +84,18 @@ public class ProductappCatalogRestallApplication implements CommandLineRunner{
 //		
 //		productService.getAll().forEach(System.out::println);
 //		
-		
-		
+//		productService.getByColor("white").forEach(System.out::println);
+//		System.out.println();
+//		productService.getByOfferType("CASH BACK").forEach(System.out::println);
+//		System.out.println();
+//		productService.getByBrandProductName("Samsung", "Television").forEach(System.out::println);
+//		
 	}
 
 }
+
+
+
+
+
+
