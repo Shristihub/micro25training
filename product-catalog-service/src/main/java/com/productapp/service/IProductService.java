@@ -2,23 +2,23 @@ package com.productapp.service;
 
 import java.util.List;
 
-import com.productapp.model.Product;
+import com.productapp.model.dtos.ProductDTO;
 
 public interface IProductService {
 
 	// inbuilt methods
-	void addProduct(Product product);
-	void updateProduct(Product product);
+	void addProduct(ProductDTO product);
+	void updateProduct(ProductDTO product);
 	void deleteProduct(int productId);
-	Product getById(int productId);
-	List<Product> getAll();
+	ProductDTO getById(int productId);
+	List<ProductDTO> getAll();
 	
 	// custom query
-	List<Product> getByColor(String color);
-	List<Product> getByOfferType(String type);
-	List<Product> getByBrandProductName(String brand, String productName);
-	List<Product> findByBrandColor(String brand,String color);
-	List<Product> getByCategory(String category);
+	List<ProductDTO> getByColor(String color);
+	List<ProductDTO> getByOfferType(String type);
+	List<ProductDTO> getByBrandProductName(String brand, String productName);
+	List<ProductDTO> findByBrandColor(String brand,String color);
+	List<ProductDTO> getByCategory(String category);
 }
 
 

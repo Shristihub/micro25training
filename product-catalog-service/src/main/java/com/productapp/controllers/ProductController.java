@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.productapp.model.Product;
+import com.productapp.model.dtos.ProductDTO;
 import com.productapp.service.IProductService;
 
 @RestController
@@ -25,15 +26,17 @@ public class ProductController {
 
 	@Autowired
 	private IProductService productService;
+	
+	
 
 	@PostMapping("/products")
-	ResponseEntity<Void> addProduct(@RequestBody Product product) {
-	 productService.addProduct(product);
+	ResponseEntity<Void> addProduct(@RequestBody ProductDTO productDTO) {
+	 productService.addProduct(productDTO);
 	 return ResponseEntity.ok().build();
 	}
 	@PutMapping("/products")
-	ResponseEntity<Void> updateProduct(@RequestBody Product product) {
-		productService.updateProduct(product);
+	ResponseEntity<Void> updateProduct(@RequestBody ProductDTO productDTO) {
+		productService.updateProduct(productDTO);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("info", "Updating one product");
 		return ResponseEntity.ok().headers(headers).build();
@@ -47,8 +50,8 @@ public class ProductController {
 	}
 
 	@GetMapping("/products")
-	public ResponseEntity<List<Product>> getAll() {
-		List<Product> products = productService.getAll();
+	public ResponseEntity<List<ProductDTO>> getAll() {
+		List<ProductDTO> products = productService.getAll();
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("info", "Returning list of products");
 		headers.add("desc", "List of all products");
@@ -56,16 +59,16 @@ public class ProductController {
 	}
 
 	@GetMapping("/products/productId/{productId}")
-	public ResponseEntity<Product> getProductById(@PathVariable int productId) {
-		Product product = productService.getById(productId);
+	public ResponseEntity<ProductDTO> getProductById(@PathVariable int productId) {
+		ProductDTO productDTO = productService.getById(productId);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("info", "Returning one product by id");
 		return new ResponseEntity<>(product, headers, HttpStatusCode.valueOf(HttpStatus.OK.value()));
 	}
 
 	@GetMapping("/products/category/{category}")
-	public ResponseEntity<List<Product>> getProductByCategory(@PathVariable String category) {
-		List<Product> products = productService.getByCategory(category);
+	public ResponseEntity<List<ProductDTO>> getProductByCategory(@PathVariable String category) {
+		List<ProductDTO> products = productService.getByCategory(category);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("info", "Returning list of products by category" + category);
 		headers.add("desc", "Category " + category);
@@ -73,8 +76,8 @@ public class ProductController {
 	}
 
 	@GetMapping("/products/features/color/{color}")
-	public ResponseEntity<List<Product>> getProductByColor(@PathVariable String color) {
-		List<Product> products = productService.getByColor(color);
+	public ResponseEntity<List<ProductDTO>> getProductByColor(@PathVariable String color) {
+		List<ProductDTO> products = productService.getByColor(color);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("info", "Returning list of products by color" + color);
 		headers.add("desc", "Color " + color);

@@ -1,0 +1,26 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: CONFIG-SERVER
+
+#this config server connects to the git repository  using the given url
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Shristihub/micro25repo.git
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+ 
+#to access the yml file in github
+#http://localhost:8888/application-default.yml
+#http://localhost:8888/{anyname}-{profile}.yml
+#http://localhost:8888/{PRODUCT-CATALOG}-{dev}.yml
+
+#http://localhost:8888/product-catalog/dev
+       

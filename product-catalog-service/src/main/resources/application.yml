@@ -1,20 +1,29 @@
 server:
   port: 8081
 
-#database specific configuration
+##database specific configuration
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/microdb
-    username: root	
-    password: root
-
-#jpa specific configuration
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update			
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/microdb
+#    username: root	
+#    password: root
+#
+##jpa specific configuration
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#     ddl-auto: update		
   application:
-    name: PRODUCT-CATALOG
+   name: PRODUCT-CATALOG
+
+# add the url of the config server
+  config:
+      import: configserver:http://localhost:8888
+
+#set active profile
+  profiles:
+    active: dev
+
 
 # register with eureka registry
 eureka:
@@ -22,8 +31,17 @@ eureka:
     service-url:
       default-zone: http://EUREKA-REGISTRY
 
+management:
+  endpoints:
+    web:
+      base-path: /management-dashboard
+      exposure:
+        include: '*'
+        exclude: beans
 
-
+message: Hello
+databaseName: Mysql
+        
 
 
 
