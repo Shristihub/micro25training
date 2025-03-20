@@ -2,6 +2,7 @@ package com.productapp;
 
 import java.util.Arrays;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -21,25 +22,28 @@ public class ProductCatalogServiceApplication {
 	
 	@Bean
 	@Profile("default")
-	public Courses otherCourse() {
+	 Courses otherCourse() {
 		Courses course = new Courses();
 		course.setCourseNames(Arrays.asList("AI","ML"));
 		return course;
 	}
 	@Bean
 	@Profile("dev")
-	public Courses webCourse() {
+	 Courses webCourse() {
 		Courses course = new Courses();
 		course.setCourseNames(Arrays.asList("React","Angular"));
 		return course;
 	}
 	@Bean
 	@Profile("prod")
-	public Courses backendCourse() {
+	 Courses backendCourse() {
 		Courses course = new Courses();
 		course.setCourseNames(Arrays.asList("Spring","Microservicesr"));
 		return course;
 	}
-	
+	@Bean
+	ModelMapper mapper() {
+		return new ModelMapper();
+	}
 
 }

@@ -63,7 +63,7 @@ public class ProductController {
 		ProductDTO productDTO = productService.getById(productId);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("info", "Returning one product by id");
-		return new ResponseEntity<>(product, headers, HttpStatusCode.valueOf(HttpStatus.OK.value()));
+		return new ResponseEntity<ProductDTO>(productDTO, headers, HttpStatusCode.valueOf(HttpStatus.OK.value()));
 	}
 
 	@GetMapping("/products/category/{category}")

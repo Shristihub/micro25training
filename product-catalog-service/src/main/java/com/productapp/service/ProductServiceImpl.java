@@ -3,6 +3,7 @@ package com.productapp.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.productapp.model.Product;
 import com.productapp.model.dtos.ProductDTO;
 import com.productapp.repository.IProductRepository;
-import com.productapp.util.ProductMapper;
 
 import jakarta.transaction.Transactional;
 @Service
@@ -18,10 +18,10 @@ import jakarta.transaction.Transactional;
 public class ProductServiceImpl implements IProductService {
 
 	private IProductRepository productRepository;
-	private ProductMapper mapper;
+	private ModelMapper mapper;
 	
 	
-	public ProductServiceImpl(IProductRepository productRepository, ProductMapper mapper) {
+	public ProductServiceImpl(IProductRepository productRepository, ModelMapper mapper) {
 		super();
 		this.productRepository = productRepository;
 		this.mapper = mapper;
@@ -29,13 +29,13 @@ public class ProductServiceImpl implements IProductService {
 
 	@Override
 	public void addProduct(ProductDTO productDTO) {
-		Product product = mapper.convertToEntity(productDTO);
+		Product product = mapper.map(productDTO,Product.class);
 		productRepository.save(product);
 	}
 
 	@Override
 	public void updateProduct(ProductDTO productDTO) {
-		Product product = mapper.convertToEntity(productDTO);
+		Product product = mapper.map(productDTO,Product.class);
 		productRepository.save(product);
 	}
 
@@ -49,7 +49,7 @@ public class ProductServiceImpl implements IProductService {
 		Optional<Product> productopt = productRepository.findById(productId);
 		if (productopt.isPresent()) {
 			Product  product = productopt.get();
-			ProductDTO productDTO = mapper.convertToDTO(product);
+			ProductDTO productDTO = mapper.map(product,ProductDTO.class);
 			return productDTO;
 		}
 		else
@@ -63,32 +63,47 @@ public class ProductServiceImpl implements IProductService {
 		Sort sort= Sort.by("productName");
 		List<Product> products = productRepository.findAll(sort);
 		return products.stream()
-		   .map(product->mapper.convertToDTO(product))
+		   .map(product->mapper.map(product,ProductDTO.class))
 		   .toList();
 	}
 
 	@Override
 	public List<ProductDTO> getByColor(String color) {
-		return productRepository.findByColor(color,Sort.by(Direction.DESC,"price"));
+		List<Product> products = productRepository.findByColor(color,Sort.by(Direction.DESC,"price"));
+		return products.stream()
+		   .map(product->mapper.map(product,ProductDTO.class))
+		   .toList();
 	}
 
 	@Override
 	public List<ProductDTO> getByOfferType(String type) {
-		return productRepository.getByOfferType(type);
+		List<Product> products = productRepository.getByOfferType(type);
+		return products.stream()
+		   .map(product->mapper.map(product,ProductDTO.class))
+		   .toList();
 	}
 
 	@Override
 	public List<ProductDTO> getByBrandProductName(String brand, String productName) {
-		return productRepository.getByBrandProductName(brand, productName);
+		List<Product> products = productRepository.getByBrandProductName(brand, productName);
+		return products.stream()
+		   .map(product->mapper.map(product,ProductDTO.class))
+		   .toList();
 	}
 
 	@Override
 	public List<ProductDTO> findByBrandColor(String brand, String color) {
-		return productRepository.findByBrandColor(brand, color);
+		List<Product> products = productRepository.findByBrandColor(brand, color);
+		return products.stream()
+		   .map(product->mapper.map(product,ProductDTO.class))
+		   .toList();
 	}
 
 	@Override
 	public List<ProductDTO> getByCategory(String category) {
-		return productRepository.getByCategory(category);
+		List<Product> products = productRepository.getByCategory(category);
+		return products.stream()
+		   .map(product->mapper.map(product,ProductDTO.class))
+		   .toList();
 	}
 }
