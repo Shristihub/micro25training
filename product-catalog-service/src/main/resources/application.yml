@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8082
 
 ##database specific configuration
 spring:
@@ -20,9 +20,9 @@ spring:
   config:
       import: configserver:http://localhost:8888
 
-#set active profile
-  profiles:
-    active: dev
+##set active profile
+#  profiles:
+#    active: dev
 
 
 # register with eureka registry

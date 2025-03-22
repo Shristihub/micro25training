@@ -1,6 +1,5 @@
 package com.inventoryapp.model;
 
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,10 +7,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity
-public class Product {
+public class InventoryDTO {
 
-	private Integer productId;
-	String productName;
 	
+	private Integer productId;
+	private int stock;
+
+	
+	
+
 }

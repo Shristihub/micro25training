@@ -21,25 +21,24 @@ import com.productapp.model.dtos.ProductDTO;
 import com.productapp.service.IProductService;
 
 @RestController
-@RequestMapping("/productcatalog-service/v1")
+@RequestMapping("/catalog-service/v1")
 public class ProductController {
 
 	@Autowired
 	private IProductService productService;
 	
-	
-
+	//	http://localhost:8082/catalog-service/v1/products
 	@PostMapping("/products")
 	ResponseEntity<Void> addProduct(@RequestBody ProductDTO productDTO) {
 	 productService.addProduct(productDTO);
-	 return ResponseEntity.ok().build();
+	 return ResponseEntity.status(201).build();
 	}
 	@PutMapping("/products")
 	ResponseEntity<Void> updateProduct(@RequestBody ProductDTO productDTO) {
 		productService.updateProduct(productDTO);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("info", "Updating one product");
-		return ResponseEntity.ok().headers(headers).build();
+		return ResponseEntity.accepted().headers(headers).build();
 	}
 	@DeleteMapping("/products/productId/{productId}")
 	ResponseEntity<Void> deleteProduct(@RequestBody int productId) {
@@ -48,7 +47,7 @@ public class ProductController {
 		headers.add("info", "Deleting one product by Id "+productId);
 		return ResponseEntity.ok().headers(headers).build();
 	}
-
+//	http://localhost:8082/catalog-service/v1/products
 	@GetMapping("/products")
 	public ResponseEntity<List<ProductDTO>> getAll() {
 		List<ProductDTO> products = productService.getAll();
@@ -57,7 +56,7 @@ public class ProductController {
 		headers.add("desc", "List of all products");
 		return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(products);
 	}
-
+//	http://localhost:8082/catalog-service/v1/products/productId/1
 	@GetMapping("/products/productId/{productId}")
 	public ResponseEntity<ProductDTO> getProductById(@PathVariable int productId) {
 		ProductDTO productDTO = productService.getById(productId);
@@ -65,7 +64,7 @@ public class ProductController {
 		headers.add("info", "Returning one product by id");
 		return new ResponseEntity<ProductDTO>(productDTO, headers, HttpStatusCode.valueOf(HttpStatus.OK.value()));
 	}
-
+//	http://localhost:8082/catalog-service/v1/products/category/Electronics
 	@GetMapping("/products/category/{category}")
 	public ResponseEntity<List<ProductDTO>> getProductByCategory(@PathVariable String category) {
 		List<ProductDTO> products = productService.getByCategory(category);

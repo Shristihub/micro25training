@@ -20,6 +20,7 @@ public class ProductDTO {
 	private List<CategoryDTO> categories;
 	private List<String> deliveryType; // free, prime,standard
 	private List<String> paymentModes; // UPI,COD,credit card, debit card
+	private int stock;
 	
 
 	

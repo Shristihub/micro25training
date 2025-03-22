@@ -1,11 +1,11 @@
 package com.inventoryapp.service;
 
-import java.util.List;
-
-import com.inventoryapp.model.Product;
+import com.inventoryapp.model.InventoryDTO;
 
 public interface IInventoryService {
 	
-	public List<Product> getAll();
+	      String  addStock(InventoryDTO inventoryDTO);
+	      int checkStock(int productId);
+	      String updateStock(int productId, int stock);
 
 }

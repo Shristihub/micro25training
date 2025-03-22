@@ -22,6 +22,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -68,6 +69,8 @@ public class Product {
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "payment",joinColumns = @JoinColumn(name="product_id"))
 	private List<String> paymentModes; // UPI,COD,credit card, debit card
+	@Transient
+	private int stock; // to store in inventoryService
 
 	public Product(String productName, double price, Features features, List<Offers> offers, List<Category> categories,
 			List<String> deliveryType, List<String> paymentModes, Brand brand) {

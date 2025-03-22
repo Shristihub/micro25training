@@ -1,0 +1,47 @@
+server:
+  port: 9000
+
+spring:
+  application:
+   name: PRODUCT-GATEWAY
+#adding routing declaratively
+#adding routes .each route has id, uri,Predicates
+#  cloud:
+#    gateway:
+#      mvc:
+#        routes:
+#        - id: catalogService
+#          uri: lb://PRODUCT-CATALOG
+#          predicates:
+#          - Path= /catalog-service/**
+#        - id: inventoryService
+#          uri: lb://PRODUCT-INVENTORY
+#          predicates:
+#          - Path= /inventory-service/**
+#        - id: infoService
+#          uri: lb://PRODUCT-INFO
+#          predicates:
+#          - Path= /info-service/**
+
+
+# register with eureka registry
+eureka:
+  client:
+    service-url:
+      default-zone: http://EUREKA-REGISTRY
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

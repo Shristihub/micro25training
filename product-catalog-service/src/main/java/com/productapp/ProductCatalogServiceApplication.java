@@ -6,9 +6,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
+import org.springframework.web.client.RestTemplate;
 
 import com.productapp.util.Courses;
 
@@ -18,6 +20,17 @@ public class ProductCatalogServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProductCatalogServiceApplication.class, args);
+	}
+	
+	@Bean
+	ModelMapper mapper() {
+		return new ModelMapper();
+	}
+	
+	@Bean
+	@LoadBalanced
+	RestTemplate restTemplate() {
+		return new RestTemplate();
 	}
 	
 	@Bean
@@ -41,9 +54,6 @@ public class ProductCatalogServiceApplication {
 		course.setCourseNames(Arrays.asList("Spring","Microservicesr"));
 		return course;
 	}
-	@Bean
-	ModelMapper mapper() {
-		return new ModelMapper();
-	}
+	
 
 }
