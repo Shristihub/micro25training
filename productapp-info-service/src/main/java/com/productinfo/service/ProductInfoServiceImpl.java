@@ -2,19 +2,24 @@ package com.productinfo.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.productinfo.model.Product;
 
-//@Service
+@Service
 public class ProductInfoServiceImpl implements IProductInfoService {
 
 	private RestTemplate restTemplate;
 //	make an api call to catalog service
 	// get the base url
 	private final String BASEURL = "http://PRODUCT-CATALOG/catalog-service/v1/products";
+	@Autowired
+	private LoadBalancerClient loadBalancerClient;
 
 	public ProductInfoServiceImpl(RestTemplate restTemplate) {
 		super();
@@ -23,6 +28,13 @@ public class ProductInfoServiceImpl implements IProductInfoService {
 
 	@Override
 	public Product getById(int productId) {
+		ServiceInstance instance =  loadBalancerClient.choose("PRODUCT-CATALOG");
+		System.out.println("........");
+		System.out.println("Host...."+instance.getHost());
+		System.out.println("Port "+instance.getPort());
+		System.out.println("id "+instance.getInstanceId());
+		
+		
 //		http://localhost:8082/catalog-service/v1/products/productId/1
 		String url = BASEURL.concat("/productId/") + productId;
 		ResponseEntity<Product> response = restTemplate.getForEntity(url, Product.class);

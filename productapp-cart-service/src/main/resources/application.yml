@@ -1,0 +1,41 @@
+server:
+  port: 8089
+
+spring:
+  application:
+   name: PRODUCT-CART
+
+# add the url of the config server
+  config:
+      import: configserver:http://localhost:8888
+
+
+# register with eureka registry
+eureka:
+  client:
+    service-url:
+      default-zone: http://EUREKA-REGISTRY
+
+management:
+  endpoints:
+    web:
+      base-path: /management-dashboard
+      exposure:
+        include: '*'
+        exclude: beans
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+

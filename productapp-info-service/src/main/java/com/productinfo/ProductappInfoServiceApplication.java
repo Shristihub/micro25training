@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-@EnableFeignClients
+//@EnableFeignClients
+@EnableDiscoveryClient
 public class ProductappInfoServiceApplication {
 
 	public static void main(String[] args) {

@@ -17,12 +17,12 @@ import com.productinfo.service.IProductInfoService;
 @RequestMapping("/info-service/v1")
 public class ProductInfoController {
 	
-//	@Autowired
-//	private IProductInfoService productInfoService;
+	@Autowired
+	private IProductInfoService productInfoService;
 //	
 	//use feign client reference
-	@Autowired
-	private ProductCatalogClient productInfoService;
+//	@Autowired
+//	private ProductCatalogClient productInfoService;
 	
 	
 	

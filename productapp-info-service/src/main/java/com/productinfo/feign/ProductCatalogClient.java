@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.productinfo.model.Product;
 
-@FeignClient(name="PRODUCT-CATALOG")
+//@FeignClient(name="PRODUCT-CATALOG")
 public interface ProductCatalogClient {
 	
 	// copy the rest apis to which you want to connect

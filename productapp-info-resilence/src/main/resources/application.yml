@@ -1,0 +1,61 @@
+server:
+  port: 8075
+
+spring:
+  application:
+   name: PRODUCT-INFO-RESILENCE
+
+
+# register with eureka registry
+eureka:
+  client:
+    service-url:
+      default-zone: http://EUREKA-REGISTRY
+
+#management.endpoints.web.exposure.include='*'
+#management.health.circuitbreakers.enabled=true
+#management.endpoint.health.show-details=ALWAYS
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+   
+#configuration for resilence
+resilience4j:
+ circuitbreaker:
+    instances:
+     info-service:
+       register-health-indicator: true
+       slidingWindowType: COUNT_BASED
+       slidingWindowSize: 10
+       minimumNumberOfCalls: 5
+       permittedNumberOfCallsInHalfOpenState: 3
+       automaticTransitionFromOpenToHalfOpenEnabled: true
+       waitDurationInOpenState: 5s
+       failureRateThreshold: 50
+     
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
